@@ -1,0 +1,93 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>MyDailies | Home</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <h1>Your Tasks:</h1>
+                {% if tasks %}
+                {% for object in tasks %}
+                <div class="mb-3 shadow py-2 px-2 border-style border">
+                    {{ forloop.counter }}. 
+                    <div class="pt-2">
+                        <label for="task">Task:</label>
+                        {{object.task}}
+                    </div>
+                    <div class="pt-2">
+                        <label for="priority">Priority:</label>
+                        {{object.priority}}
+                    </div>
+                    <div class="pt-2">
+                        <label for="date">Date:</label>
+                        {{object.date}}
+                    </div>
+                    <div style="text-align: right;">
+                        <a href="{% url 'update_task' object.id %}" class="px-2 py-2 btn btn-primary">Update</a>
+                        <a href="{% url 'complete_task' object.id %}" class="px-2 py-2 btn btn-success">Complete</a>
+                        <a href="{% url 'delete_task' object.id %}" class="px-2 py-2 btn btn-danger" >Remove</a>
+                    </div>  
+                </div>
+                {% endfor %}
+                {% else %}
+                <h2>You have no task!</h2>
+                {% endif %}
+            </div>
+            <!-- <div>
+                <a href="{% url 'add_task' %}" class="btn btn-primary">Add Tasks</a>
+            </div> -->
+        </div>
+        <div class="col-md-6">
+            <h1>Add Tasks:</h1>
+            <form class="px-2 py-2 shadow border-style border" method="post" action="{% url 'add_task' %}">
+                <div class="form-group">
+                    <label for="task">Task:</label>
+                    <input class="form-control" type="text" name="task" placeholder="Task">
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select class="form-control" name="priority">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input class="form-control" type="date" name="date">
+                </div>
+                <div class="form-group py-2">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Add Task</button>
+                </div>
+            </form>
+            <div class="mb-3">
+                <h1>Completed:</h1>
+                {% if completed_task %}
+                {% for object in completed_task %}
+                <div class="mb-3 shadow py-2 px-2 border-style border ">
+                    {{ forloop.counter }}.
+                    <svg style="float: right;" id="tik1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M17.28 9.28a.75.75 0 0 0-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6.5-6.5Z"></path><path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z"></path></svg>
+                    <div class="pt-2">
+                        <label for="task">Task:</label>
+                        {{object.completed_task}}
+                    </div>
+                    <div class="pt-2">
+                        <label for="date">Date:</label>
+                        {{object.complete_task}}
+                    </div> 
+                </div>
+                {% endfor %}
+                <a href="{% url 'completed_task_clear' %}" class="btn btn-danger" style="float: right;" >Clear</a>
+                {% else %}
+                <h2>You have not completed any tasks!</h2>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

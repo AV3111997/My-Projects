@@ -1,0 +1,220 @@
+.form-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 5%;
+}
+
+.form-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login-div,
+.signup-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-family {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.banner {
+  width: 100%
+}
+
+.custom-banner {
+  height: auto;
+  width: 100%;
+}
+
+.card-img-display {
+  width: full;
+  height: 300px;
+}
+
+.card-button,
+.submit-button {
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.card-button-buy,
+.submit-button {
+  background-color: #007bff;
+}
+
+.card-button-buy{
+  display: flex;
+  justify-content: right;
+}
+
+.card-button-cart {
+  background-color: #ff0000;
+}
+.card-button-cart:hover {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+
+.page-title-banner {
+  width: full;
+  background-color: #cccccc;
+  color: #262626;
+  text-align: center;
+  padding: 3%;
+}
+
+.card-border {
+  border: none;
+}
+
+.footer {
+  width: full;
+  background-color: #cccccc;
+  color: #262626;
+  text-align: center;
+  padding: 5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+}
+
+.user-name-display {
+  background-color: #007bff;
+  /* Background color */
+  color: #fff;
+  /* Text color */
+  padding: 5px 10px;
+  /* Padding for spacing */
+  border-radius: 5px;
+  /* Rounded corners */
+}
+
+.search-notfound {
+  text-align: center;
+}
+
+.search-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+}
+
+.pagination-nav {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.quantity-selector label,
+.quantity-selector button,
+.quantity-selector h4,
+.quantity-selector input {
+    margin-right: 10px;
+}
+
+#addtocart{
+  display: flex;
+  justify-content: right;
+}
+
+#incrementButton, #decrementButton {
+  background-color: #2cc900;
+  color: white;
+  padding: 5px 10px; /* Consolidate padding into a single property */
+  border: none;
+  text-align: center;
+  width: 40px;
+  outline: none;
+}
+
+#incrementButton {
+  border-radius: 5px 0px 0px 5px;
+}
+
+#decrementButton {
+  background-color: #ff0000;
+  border-radius: 0px 5px 5px 0px;
+}
+
+#decrementButton:hover{
+  background-color: #cc0000;
+  color: #fff;
+}
+
+#incrementButton:hover {
+  background-color: #1a9200; /* Change background color on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+#incrementButton:active {
+  background-color: #0a6100; /* Change background color on click */
+  color: #eee;
+}
+
+#decrementButton:active{
+  background-color: #bf0202;
+  color: #fff;
+}
+
+#addtocart button{
+  border: none;
+  background-color: #007bff;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 10px 0;
+  cursor: pointer;
+  outline: none;
+}
+
+#addtocart button:hover{
+  background-color: #0000cc; 
+}
+
+#addtocart button:active{
+  background-color: #0b039c; 
+  color: #fff;
+}
+
+.cartlist-div{
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 5%;
+}

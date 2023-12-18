@@ -1,0 +1,18 @@
+{% extends 'shared/base.html' %}
+{% block meta %}
+<title>MyDailes | Update Task</title>
+{% endblock meta %}
+
+{% block content %}
+<form method="post">
+    <div class="container">
+        <div class="row">
+            <div class="px-2 py-2 shadow border-style border">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-primary" type="submit" value="Update">
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}

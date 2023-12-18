@@ -1,0 +1,58 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+
+{% endblock meta %}
+
+{% block title %}
+<title>Products | Urbanworn Clothing Co</title>
+{% endblock title %}
+
+{% block content %}
+<section>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6">
+            <div><h3>New Product</h3></div>
+            <form method="POST" action="add_product" enctype="multipart/form-data">
+               {% csrf_token %}
+                  <div class="form-group">
+                     <label for="name">{{form.name.label}}</label>
+                     <input type="text" class="form-control" name="name">
+                     {{ form.name.errors }}
+                  </div>
+                  <div class="form-group">
+                     <label for="price">{{form.price.label}}</label>
+                     <input type="text" class="form-control" name="price">
+                     {{ form.price.errors }}
+                  </div>
+                  <div class="form-group">
+                     <label for="category">{{form.category.label}}</label>
+                     <select name="{{ form.category.name }}" id="{{ form.category.id_for_label }}" class="form-control">
+                        <option value="" disabled selected>{{ form.category.empty_label }}</option>
+                        {% for choice in form.category.field.queryset %}
+                            <option value="{{ choice.pk }}">{{ choice }}</option>
+                        {% endfor %}
+                    </select>
+                     {{ form.category.errors }}
+                  </div>
+                  <div class="form-group">
+                     <label for="image">Upload Image</label>
+                     {{ form.image }}
+                     {{ form.image.errors }}
+                 </div>
+                  <div class="form-group">
+                     <label for="stock">{{form.stock.label}}</label>
+                     <input type="text" class="form-control" name="stock">
+                     {{ form.stock.errors }}
+                  </div>
+                  <div class="form-group">
+                     <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock content %}

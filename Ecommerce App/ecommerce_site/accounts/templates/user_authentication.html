@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+
+<title>Login</title>
+
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    <div class="form-div">
+        <div class="col-md-6 shadow">
+            <div class="form-content">
+                <div class="text-center">
+                    <h1>You need to login to access cart!</h1>
+                </div>
+                <div style="text-align: center;"><p style="display: inline-block;"><a href="{% url 'login' %}">click here</a></p>&nbsp;to go to login page.</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

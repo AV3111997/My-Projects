@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+<title>Finanza - Financial Services Website Template</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="maincontainer">
+    <div class="container-fluid callback my-5 pt-5">
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded p-4 p-sm-5 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="text-center">
+                            <h1>Application Accepted!</h1>
+                        </div>
+                        <div class="text-center my-5">
+                            <a class="btn btn-primary py-3 px-5" href="{% url 'home' %}">Go to Home page</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

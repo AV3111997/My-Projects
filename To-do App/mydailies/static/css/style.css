@@ -1,0 +1,17 @@
+  .border-style {
+    border-radius: 5px;
+  }
+
+  .banner {
+    background-color: #ff8000;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+
+  .banner-text{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    color: white;
+  }
+

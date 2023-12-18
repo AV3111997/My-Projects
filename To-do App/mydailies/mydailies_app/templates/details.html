@@ -1,0 +1,27 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>MyDailes | Task</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+                <div>
+                    Task: {{task.task}}
+                </div>
+                <div>
+                    Priority: {{task.priority}}
+                </div>
+                <div>
+                    Date: {{task.date}}
+                </div>
+                <div style="text-align: right;">
+                    <a href="{% url 'cbv_update' task.id %}" class="px-2 py-2 btn btn-primary">Update</a>
+                    <a href="{% url 'cbv_delete' task.id %}" class="px-2 py-2 btn btn-danger" >Remove</a>
+                </div>  
+        </div>
+    </div>
+</div>
+{% endblock content %}

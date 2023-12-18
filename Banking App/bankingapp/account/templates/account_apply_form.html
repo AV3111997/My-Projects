@@ -1,0 +1,63 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+<title>Finanza - Financial Services Website Template</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="maincontainer">
+    <div class="container-fluid callback my-5 pt-5">
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="bg-white border rounded p-4 p-sm-5 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="text-center">
+                            <h1>Application Form</h1>
+                        </div>
+                        <form action="{% url 'account_apply' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="mx-5 my-5">
+                                {{ form.as_p }}
+                                <div class="form-group pb-2">
+                                    <label for="materials_provide">Materials Provided:</label><br>
+                                    <input type="checkbox" name="materials_provide" value="Debit Card"> Debit Card<br>
+                                    <input type="checkbox" name="materials_provide" value="Credit Card"> Credit Card<br>
+                                    <input type="checkbox" name="materials_provide" value="Checkbook"> Checkbook<br>
+                                </div>
+                                <div class="signup-div my-5">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#id_district').change(function () {
+            var districtId = $(this).val();
+            var url = "{% url 'get_branches' %}";
+            $.ajax({
+                url: url,
+                data: {
+                    'district_id': districtId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                    $('#id_branch').empty();
+                    $.each(data.branches, function (key, value) {
+                        $('#id_branch').append($('<option>').text(value.name).attr('value', value.id));
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock content %}

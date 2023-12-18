@@ -1,0 +1,92 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>Cart</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    <div class="form-div">
+        <div class="col-md-6">
+            <div class="tag-box">
+                <h1>Update Cart:</h1>
+            </div>
+            <div class="mb-3">
+                <div class="mb-3 shadow py-2 px-2 border-style border">
+                    <div class="pt-2 mx-3" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2>Add {{ cart_item.product.name }} to Cart</h2>
+                        <img src="{{ cart_item.product.image.url }}" alt="" style="width: 100px; height: 100px;">
+                    </div>
+                    <div class="pt-2 mx-3">
+                        <p>Price: $<span id="product-price">{{ cart_item.product.price }}</span></p>
+                    </div>
+                    <div class="pt-2 mx-3">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="text" name="totalcost" id="totalcost" value="totalCost" style="display: none;">
+                            <div class="quantity-selector">
+                                <label for="quantity">Quantity:</label>
+                                <button id="incrementButton" type="button">+</button>
+                                <h4 id="valueDisplay">{{ cart_item.quantity }}</h4>
+                                <button id="decrementButton" type="button">-</button>
+                                <input type="number" name="quantity" id="quantity" value="{{ cart_item.quantity }}" min="1" max="{{ cart_item.product.stock }}"
+                                    style="display: none;">
+                            </div>
+                            <div id="addtocart"><button type="submit">Update Cart</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<script>
+    const valueDisplay = document.getElementById('valueDisplay');
+    const incrementButton = document.getElementById('incrementButton');
+    const decrementButton = document.getElementById('decrementButton');
+    const quantityInput = document.getElementById('quantity');
+    const productPriceElement = document.getElementById('product-price');
+    const totalCost = document.getElementById('totalcost')
+
+    // Retrieve the initial product price
+    const initialPrice = parseFloat(productPriceElement.textContent);
+
+    // Function to update the total price
+    function updateTotalPrice() {
+        const quantity = parseInt(quantityInput.value);
+        const totalPrice = initialPrice * quantity;
+        productPriceElement.textContent = totalPrice.toFixed(2);
+        totalCost.value = totalPrice.toFixed(2);
+    }
+
+    // Increment button click event
+    incrementButton.addEventListener('click', () => {
+        let quantity = parseInt(quantityInput.value);
+        if (quantity < "{{cart_item.product.stock}}") {
+            quantity++;
+            quantityInput.value = quantity;
+            valueDisplay.textContent = quantity;
+            updateTotalPrice();
+        }
+    });
+
+    // Decrement button click event
+    decrementButton.addEventListener('click', () => {
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantity--;
+            quantityInput.value = quantity;
+            valueDisplay.textContent = quantity;
+            updateTotalPrice();
+        }
+    });
+
+    // Initial update
+    updateTotalPrice();
+</script>
+
+{% endblock content %}

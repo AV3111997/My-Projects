@@ -1,0 +1,46 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+{% if searched %}
+<title>Search Result for: {{searched}}</title>
+{% endif %}
+{% endblock meta %}
+
+{% block content %}
+
+<section name="search-result">
+   {% if searched %}
+   <div class="page-title-banner">
+      <h1>Search Result for: {{searched}}</h1>
+   </div>
+   {% endif %}
+   <div class="container my-5">
+      <div class="row justify-content-center">
+         {% if searched_products %}
+         {% for product in searched_products %}
+         <div class="col-md-3 mx-3  mb-3 shadow">
+            <div class="card card-border">
+               <img src="{{ product.image.url }}" class="card-img-display" alt="...">
+               <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <h2>${{ product.price }}</h2>
+                  <h6>In Stock: {{product.stock}}</h6>
+                  <button class="card-button card-button-buy"><a href="#"></a>Buy</button>
+                  <button class="card-button card-button-cart"><a href="#"></a>Add to Cart</button>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+         {% else %}
+         <div class="search-result shadow">
+           <div class="search-notfound">
+               <h1><span>Sorry, No products found!</span></h1>
+               <h4><span>Please, try again.</span></h4>
+           </div>
+         </div>
+         {% endif %}
+      </div>
+   </div>
+</section>
+
+{% endblock content %}

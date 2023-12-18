@@ -1,0 +1,36 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+
+{% endblock meta %}
+
+{% block title %}
+<title>Category | Urbanworn Clothing Co</title>
+{% endblock title %}
+
+{% block content %}
+<section>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6">
+            <div><h3>New Category</h3></div>
+            <form method="POST" action="add_category">
+               {% csrf_token %}
+                  <div class="form-group">
+                     <label for="name">{{form.name.label}}</label>
+                     <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="form-group">
+                     <label for="description">{{form.description.label}}</label>
+                     <input type="text" class="form-control" name="description">
+                  </div>
+                  <div class="form-group">
+                     <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock content %}

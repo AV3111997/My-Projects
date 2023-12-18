@@ -1,0 +1,37 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+
+{% endblock meta %}
+{% if category %}
+{% block title %}
+<title>Category - {{category.name}} | Urbanworn Clothing Co</title>
+{% endblock title %}
+{% endif %}
+
+{% block content %}
+
+<section name="product-section">
+   <div class="page-title-banner">
+      <h1>Products</h1>
+   </div>
+   <div class="container my-5">
+      <div class="row justify-content-center">
+         {% for product in products %}
+         <div class="col-md-3 mx-3 mb-3 shadow">
+            <div class="card card-border">
+               <img src="{{ product.image.url }}" class="card-img-display" alt="...">
+               <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <h2>${{ product.price }}</h2>
+                  <h3>In Stock: {{product.stock}}</h3>
+                  <button class="card-button card-button-cart"><a href="#"></a>Add to Cart</button>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</section>
+
+{% endblock content %}

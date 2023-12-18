@@ -1,0 +1,43 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>Login | Urbanworn Clothing Co</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    <div class="form-div">
+        <div class="col-md-6 shadow">
+            <div class="form-content">
+                <div class="text-center">
+                    <h1>Login</h1>
+                </div>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mx-5 my-5">
+                        <div class="form-group pb-2">
+                            <label for="email">{{ form.username.label }}</label>
+                            <input class="form-control" type="text" name="username" id="username">
+                            {{ form.errors }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">{{ form.password.label }}</label>
+                            <input class="form-control" type="password" name="password" id="password">
+                            {{ form.errors }}
+                        </div>
+                        <div class="login-div">
+                            <button class="submit-button" type="submit">Login</button>
+                        </div>
+                        <div class="text-center">
+                            Not a member? <a href="{% url 'register' %}">Register</a> instead.
+                        </div>
+                        {% for msg in messages %}
+                        <h2>{{msg}}</h2>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

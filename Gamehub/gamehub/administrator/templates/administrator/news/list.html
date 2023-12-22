@@ -1,0 +1,49 @@
+<!-- NEWS -->
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>News</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>NEWS</h1>
+    </div>
+    <div class="form-div">
+        <div class="form-btn-div">
+            <button><a href="{% url 'news_create' %}">
+                    <ion-icon name="pencil-outline"></ion-icon> Write News
+                </a></button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Titles</th>
+                    <th>Post</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object_list %}
+                <tr>
+                    <td>{{ i.title }}</td>
+                    <td>{{ i.news_post }}</td>
+                    <td>
+                        <a href="{% url 'news_update' id=i.id %}">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </a>&nbsp;&nbsp;
+                        <a href="{% url 'news_delete' id=i.id %}" class="text-danger"
+                            onclick="return confirm('Are you sure you want to remove this post?');">
+                            <ion-icon name="trash-bin-outline"></ion-icon>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    {% endblock content %}

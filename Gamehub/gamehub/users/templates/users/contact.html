@@ -1,0 +1,65 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>Feedback</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>FEEDBACK</h1>
+    </div>
+    <div class="form-div">
+        <div class="my-5">
+            <form method="post">
+                <div class="d-grid">
+                    <label>{{ form.name.label }}</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.name.errors %}
+                        {{ e }} <br />
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label>{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.email.errors %}
+                        {{ e }} <br />
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label>{{ form.message.label }}</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.message.errors %}
+                        {{ e }} <br />
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="d-grid mt-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

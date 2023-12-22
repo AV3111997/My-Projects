@@ -1,0 +1,64 @@
+<!-- NEWS -->
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>User List</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>REGISTERED USERS</h1>
+    </div>
+    <div class="form-div">
+        <div class="form-btn-div">
+            {% comment %}
+            <button><a href="{% url 'user_manager' %}">
+                    <ion-icon name="pencil-outline"></ion-icon> Manage Users
+                </a></button>
+            {% endcomment %}
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Registered On</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object_list %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    {% if i.is_superuser == 1 %}
+                    <td class="text-danger">Admin</td>
+                    {% else %}
+                    <td>{{ i.first_name }} {{i.last_name }}</td>
+                    {% endif %}
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.date_joined }}</td>
+                    {% if i.is_active == 1 %}
+                    <td>Active</td>
+                    {% else %}
+                    <td>Inactive</td>
+                    {% endif %}
+                    {% if i.is_superuser == 1 %}
+                    <td class="text-danger">N/A</td>
+                    {% else %}
+                    <td>
+                        <a class="text-danger" href="{% url 'user_delete' i.id %}" onclick="return confirm('Are you sure you want to remove this user?');">
+                            <ion-icon name="person-remove"></ion-icon></a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    {% endblock content %}

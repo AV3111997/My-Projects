@@ -1,0 +1,44 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>News</title>
+{% endblock meta %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>WRITE NEWS</h1>
+    </div>
+    <div class="form-div">
+        <div class="form-btn-div">
+            <button><a href="{% url 'admin_news_list' %}">
+                    <i class="fa-solid fa-list"></i>
+                </a></button>
+        </div>
+        <form method="POST">
+            <div class="d-grid">
+                <label>{{ form.title.label }}</label>
+                {% render_field form.title class="form-control" %}
+            </div>
+            <div class="d-grid">
+                <label>{{form.news_view.label}}</label>
+                {% render_field form.news_view class="form-control" %}
+            </div>
+            <div class="d-grid mt-2">
+                {% csrf_token %}
+                <button class="btn btn-primary">Post</button>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <script>alert('{{ message }}');</script>
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}

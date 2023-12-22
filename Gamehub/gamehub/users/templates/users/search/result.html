@@ -1,0 +1,57 @@
+<!-- SEARCH -->
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>Search</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    {% if searched %}
+    <div class="tag-box">
+        <h1>SEARCH RESULTS FOR: {{ searched }}</h1>
+    </div>
+    {% for i in search_object_list %}
+    <div class="col-md-3" class="product-card">
+            <div class="card">
+                <img class="card-img-top" src="{{ i.image.url }}" height="300" alt="Card image cap">
+                <div class="card-body">
+                    <a href="" class="product-title">
+                        <h5 class="card-title">{{ i.name }}</h5>
+                    </a>
+                    <p class="card-text">{{ i.description }}</p>
+                    <p>
+                        <b class="me-2">₹ {{ i.price }}</b>&period;
+                        <span class="ms-2 text-primary">{{ i.category.name }}</span>
+                    </p>
+                    {% comment %}
+                    {% if user.is_authenticated %}
+                    {% if not user.is_superuser %}
+                    <div class="list-button">
+                        <button class="wishlist-btn"><a href="{% url 'wishlist_add' id=product.id %}"><i
+                                    class="fa-solid fa-heart"></i>
+                            </a></button>
+                        <button class="cartlist-btn"><a href="{% url 'cart_add' id=product.id %}">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a></button>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endcomment %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <div class="tag-box">
+        <h1>SEARCH RESULTS</h1>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-center">No results found</h5>
+            <p class="card-text text-center">Please try again.</p>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+
+<title>Login</title>
+
+{% endblock meta %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+
+
+<div class="container">
+    <div class="tag-box">
+        <h1>LOGIN</h1>
+    </div>
+    <div class="form-div" style="display: flex; justify-content: center; align-items: center;">
+        <form method="post">
+            <div class="col-x-4">
+                <label>{{ form.username.label }}</label>
+                {% render_field form.username class="form-control" %}
+            </div>
+            <div class="col-x-4">
+                <label>{{form.password.label}}</label>
+                {% render_field form.password class="form-control" %}
+            </div>
+            <div class="form-btn-div" style="display: flex; justify-content: center; align-items: center;">
+                {% csrf_token %}
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+                <button type="submit">Log in</button>
+                <a id="register-link" href="{% url 'register' %}" style="margin-left: 10px;">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<script>alert('{{ message }}');</script>
+{% endfor %}
+{% endif %}
+
+{% endblock content %}

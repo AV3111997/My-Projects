@@ -1,0 +1,144 @@
+<div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}"><img id='logo' src="../../../static/assets/images/logo.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link underline-decoration" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link underline-decoration" aria-current="page" href="{% url 'about' %}">About</a>
+          </li>
+          {% if not user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link underline-decoration" aria-current="page" href="{% url 'news_list' %}">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link underline-decoration" aria-current="page" href="{% url 'user_contact' %} ">Feedback</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link underline-decoration" aria-current="page" href="{% url 'admin_contact' %} ">Feedback</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Category</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="{% url 'category_create' %}"><i class="fa-solid fa-plus"></i> Add
+                Category</a>
+              <a class="dropdown-item" href="{% url 'category_list' %}"><i class="fa-solid fa-list"></i> Category
+                List</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Developers</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="{% url 'dev_create' %}"><i class="fa-solid fa-plus"></i> Add Developer</a>
+              <a class="dropdown-item" href="{% url 'dev_list' %}"><i class="fa-solid fa-list"></i> Developers List</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Publishers</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="{% url 'publisher_create' %}"><i class="fa-solid fa-plus"></i> Add
+                Publisher</a>
+              <a class="dropdown-item" href="{% url 'publisher_list' %}"><i class="fa-solid fa-list"></i> Publishers
+                List</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Product</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="{% url 'product_create' %}"><i class="fa-solid fa-plus"></i> Add
+                Product</a>
+              <a class="dropdown-item" href="{% url 'product_list' %}"><i class="fa-solid fa-list"></i> Product List</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">News</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="{% url 'news_create' %}">
+                <ion-icon name="pencil-outline"></ion-icon> Write News
+              </a>
+              <a class="dropdown-item" href="{% url 'admin_news_list' %}"><i class="fa-solid fa-list"></i> News List</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link underline-decoration" aria-current="page" href="{% url 'users_list' %} ">User Manager</a>
+          </li>
+          {% endif %}
+          {% if not user.is_superuser %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Category</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              {% for i in category_object_list %}
+              <a class="dropdown-item" href="{% url 'category_selection' id=i.id  %}"><ion-icon name="chevron-forward-outline"></ion-icon>{{ i.name }}</a>
+              {% endfor %}
+            </div>
+            {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              {% if user.is_authenticated %}
+              {% if not user.is_superuser %}
+              <a class="dropdown-item" style="text-decoration: none;" href="{% url 'library_list' %}">
+                <ion-icon name="game-controller"></ion-icon>
+                Your Games
+              </a>
+              <a class="dropdown-item" style="text-decoration: none;" href="{% url 'wishlist_main' %}"><i
+                  class="fa-solid fa-heart"></i> Wishlist</a>
+              <a class="dropdown-item" style="text-decoration: none;" href="{% url 'cart_list' %}"><i
+                  class="fa-solid fa-cart-shopping"></i> Cart</a>
+              {% endif %}
+              <a href="{% url 'logout' %}" style="text-decoration: none; color: black;"
+                onclick="return confirm('Are you sure you want to log out?');">&nbsp;&nbsp;&nbsp;<i
+                  class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout</a>
+              {% else %}
+              <div>
+                <a href="{% url 'login' %}" style="text-decoration: none; color: black;">&nbsp;<i
+                    class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;&nbsp;Login</a>
+              </div>
+              <div>
+                <a href="{% url 'register' %}" style="text-decoration: none; color: black;">&nbsp;<i
+                    class="fa-solid fa-user-plus"></i> Register</a>
+              </div>
+            </div>
+            {% endif %}
+        </ul>
+      </div>
+      {% if user.is_authenticated %}
+      {% if not user.is_superuser %}
+      <span class="me-4" style="color: white;">
+        Welcome
+        <b class="text" style="color: rgb(83, 0, 151);">{{ user.get_full_name }}</b>!
+      </span>
+      {% else %}}
+      <span class="me-4" style="color: white;">
+        Welcome
+        <b class="text" style="color: rgb(255, 0, 0);">Admin</b>!
+      </span>
+      {% endif %}
+      {% endif %}
+      <div>
+        <form class="d-flex" method="post" action="{% url 'search' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" style="width:200px;" type="search" placeholder="Search" aria-label="Search" name="searched">
+          <button class="search-btn" type="submit">Search</button>
+        </form>
+      </div>
+      <script src="https://kit.fontawesome.com/3c409009f8.js" crossorigin="anonymous"></script>
+      <script src="js/bootstrap.js"></script>
+      <script src="https://kit.fontawesome.com/3c409009f8.js" crossorigin="anonymous"></script>
+  </nav>
+</div>

@@ -1,0 +1,92 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>PRODUCT</h1>
+    </div>
+    <div class="form-div">
+        <div class="form-btn-div">
+            <button><a href="{% url 'product_list' %}">
+                    <i class="fa-solid fa-list"></i>
+                </a></button>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="d-grid">
+                <label>{{ form.name.label }}</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                <div class="alert alert-danger mt-2">
+                    {% for e in form.name.errors %}
+                    {{ e }} <br />
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.slug.label }}</label>
+                {{ form.slug }}
+                {% if form.slug.errors %}
+                <div class="alert alert-danger mt-2">
+                    {% for e in form.slug.errors %}
+                    {{ e }} <br />
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.description.label }}</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                <div class="alert alert-danger mt-2">
+                    {% for e in form.description.errors %}
+                    {{ e }} <br />
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.price.label }}</label>
+                {{ form.price }}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.stock.label }}</label>
+                {{ form.stock }}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.category.label }}</label>
+                {{ form.category }}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.developer.label }}</label>
+                {{ form.developer }}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.publisher.label }}</label>
+                {{ form.publisher }}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.image.label }}</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                <div class="alert alert-danger mt-2">
+                    {% for e in form.image.errors %}
+                    {{ e }} <br />
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.status.label }}</label>
+                {{ form.status }}
+            </div>
+            <div class="d-grid mt-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

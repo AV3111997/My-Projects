@@ -1,0 +1,62 @@
+<!-- PRODUCT -->
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>Product</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>PRODUCTS</h1>
+    </div>
+    <div class="form-div">
+        <div class="form-btn-div">
+            <button><a href="{% url 'product_create' %}">
+                    + New Product
+                </a></button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Name</th>
+                    <th>Slug</th>
+                    <th>Category</th>
+                    <th>Developer</th>
+                    <th>Publisher</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object_list %}
+                <tr>
+                    <td>
+                        <img src="{{ i.image.url }}" alt="" height="30" width="30">
+                    </td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.slug }}</td>
+                    <td>{{ i.category.name }}</td>
+                    <td>{{ i.developer.name }}</td>
+                    <td>{{ i.publisher.name }}</td>
+                    <td>{{ i.price }}</td>
+                    <td>{{ i.stock }}</td>
+                    <td>
+                        <a href="{% url 'product_update' id=i.id %}">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </a>&nbsp;&nbsp;
+                        <a href="{% url 'product_delete' id=i.id %}" class="text-danger"
+                            onclick="return confirm('Are you sure you want to remove {{ i.name }}?');">
+                            <ion-icon name="trash-bin-outline"></ion-icon>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    {% endblock content %}

@@ -1,0 +1,53 @@
+<!-- PUBLISHER -->
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+<title>Publisher</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="container">
+    <div class="tag-box">
+        <h1>PUBLISHERS</h1>
+    </div>
+    <div class="form-div">
+        <div class="form-btn-div">
+            <button><a href="{% url 'publisher_create' %}">
+                    + New Publisher
+                </a></button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Description</th>
+                    <th>Website</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object_list %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.slug }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.website }}</td>
+                    <td>
+                        <a href="{% url 'publisher_update' id=i.id %}">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </a>&nbsp;&nbsp;
+                        <a href="{% url 'publisher_delete' id=i.id %}" class="text-danger"
+                            onclick="return confirm('Are you sure you want to remove {{ i.name }}?');">
+                            <ion-icon name="trash-bin-outline"></ion-icon>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    {% endblock content %}

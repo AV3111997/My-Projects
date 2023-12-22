@@ -1,0 +1,72 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+
+<title>Register</title>
+
+{% endblock meta %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+
+<div class="text-center">
+    <h1>Sign Up</h1>
+</div>
+<div class="container">
+    <div class="tag-box">
+        <h1>REGISTER</h1>
+    </div>
+    <div class="form-div" style="display: flex; justify-content: center; align-items: center;">
+        <form method="post">
+            <div class="col-x-4">
+                <label>{{ form.first_name.label }}</label>
+                {% render_field form.first_name class="form-control"%}
+            </div>
+            <div class="col-x-4">
+                <label>{{form.last_name.label}}</label>
+                {% render_field form.last_name class="form-control"%}
+            </div>
+            <div class="col-x-4">
+                <label>{{form.email.label}}</label>
+                {% render_field form.email class="form-control"%}
+                {% if form.email.errors %}
+                <div class="alert alert-danger mt-2">
+                    {% for e in form.email.errors %}
+                    {{ e }} <br />
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-x-4">
+                <label>{{form.password.label}}</label>
+                {% render_field form.password class="form-control" %}
+            </div>
+            <div class="col-x-4">
+                <label>{{form.confirm_password.label}}</label>
+                {% render_field form.confirm_password class="form-control" %}
+                {% if form.confirm_password.errors %}
+                <div class="alert alert-danger mt-2">
+                    {% for e in form.confirm_password.errors %}
+                    {{ e }} <br />
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-btn-div" style="display: flex; justify-content: center; align-items: center;">
+                {% csrf_token %}
+                <button type="submit">Sign Up</button>
+                <a id="register-link" href="{% url 'login' %}" style="margin-left: 10px;">Login instead</a>
+            </div>
+        </form>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <script>alert('{{ message }}');</script>
+    {% endfor %}
+    {% endif %}
+</div>
+</div>
+</div>
+
+{% endblock content %}
